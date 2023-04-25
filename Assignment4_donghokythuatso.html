@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 </head>
 
@@ -25,21 +25,26 @@
     <div id="clock"></div>
 
     <script>
-        function updateClock() {
-            var now = new Date();
-            console.log(now);
-            var hours = now.getHours();
-            var minutes = now.getMinutes();
-            var seconds = now.getSeconds();
-            var ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12;
-            hours = hours != 0 ? hours : 12;
-            var time = hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0") + ':' + seconds.toString().padStart(2, "0") + ' ' + ampm;
-            document.getElementById('clock').innerHTML = time;
-        }
-
         window.onload = function() {
-            setInterval(updateClock, 1000);
+            setInterval(function() {
+                var now = new Date();
+                console.log(now);
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds();
+                var ampm = hours >= 12 ? "PM" : "AM";
+                hours = hours % 12;
+                hours = hours != 0 ? hours : 12;
+                var time =
+                    hours.toString().padStart(2, "0") +
+                    ":" +
+                    minutes.toString().padStart(2, "0") +
+                    ":" +
+                    seconds.toString().padStart(2, "0") +
+                    " " +
+                    ampm;
+                document.getElementById("clock").innerHTML = time;
+            }, 1000);
         };
     </script>
 </body>
