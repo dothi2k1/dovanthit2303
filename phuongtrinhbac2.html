@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Giải phương trình bậc hai</h1>
+
+
+    <input placeholder="A" type="number" id="a" />
+    <label>X<sup>2 + </sup></label>
+
+    <input placeholder="B" type="number" id="b" />
+    <label>X + </label>
+
+    <input placeholder="C" type="number" id="c" />
+
+    <button onclick="giaiPhuongTrinh()">Giải phương trình</button>
+
+    <p id="ketqua"></p>
+
+    <script>
+        function giaiPhuongTrinh() {
+            var a = parseFloat(document.getElementById("a").value);
+            var b = parseFloat(document.getElementById("b").value);
+            var c = parseFloat(document.getElementById("c").value);
+
+            if (a == 0) {
+                if (b == 0) {
+                    if (c == 0) {
+                        document.getElementById("ketqua").innerHTML = "Phương trình vô số nghiệm";
+                    } else {
+                        document.getElementById("ketqua").innerHTML = "Phương trình vô nghiệm";
+                    }
+                } else {
+                    var x = -c / b;
+                    document.getElementById("ketqua").innerHTML = "Phương trình có nghiệm duy nhất x = " + x;
+                }
+            } else {
+                var delta = b * b - 4 * a * c;
+
+                if (delta < 0) {
+                    document.getElementById("ketqua").innerHTML = "Phương trình vô nghiệm";
+                } else if (delta == 0) {
+                    var x = -b / (2 * a);
+                    document.getElementById("ketqua").innerHTML = "Phương trình có nghiệm kép x = " + x;
+                } else {
+                    var x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                    var x2 = (-b - Math.sqrt(delta)) / (2 * a);
+                    document.getElementById("ketqua").innerHTML = "Phương trình có 2 nghiệm phân biệt: x1 = " + x1 + ", x2 = " + x2;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
