@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label for="">Nhập năm sinh:</label>
+    <input oninput="tinhtuoi()" min="1900" max="9999" id="date" type="number" placeholder="VD: 1990">
+    <div id="age"></div>
+    <script>
+        const now = new Date();
+        const year = now.getFullYear();
+        const ageOutput = document.getElementById("age");
+
+        function tinhtuoi() {
+            namsinh = document.getElementById("date").value;
+            tuoi = year - namsinh;
+            console.log(tuoi);
+            if (namsinh < 1900 || namsinh > 9999) {
+                ageOutput.innerHTML = "Vui lòng nhập một năm sinh hợp lệ.";
+            } else if (!namsinh) {
+                ageOutput.innerHTML = "Vui lòng nhập năm sinh của bạn.";
+            } else {
+                ageOutput.innerHTML = `Bạn ${tuoi} tuổi.`;
+            }
+        }
+    </script>
+</body>
+
+</html>
