@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        * {
+            font-size: 30px;
+            font-family: roboto;
+            border-radius: 5px;
+        }
+        
+        button {
+            margin: 10px 0px;
+            padding: 5px 10px;
+            background-color: #ff6d87;
+            color: white;
+            border: 2px solid #ff113b;
+            cursor: pointer;
+        }
+        
+        .wrap {
+            max-width: 1200px;
+            margin: 50px auto;
+        }
+        
+        .calculator {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0px 20px;
+        }
+        
+        #result {
+            display: block;
+            width: 100%;
+            height: 100px;
+            border: 2px solid #ff113b;
+        }
+        
+        input {
+            margin-bottom: 20px;
+            width: 100%;
+            border: 2px solid #ff113b;
+        }
+    </style>
+
+    <div class="wrap">
+
+        <div class="calculator">
+            <h1>Máy tính online</h1>
+            <input type="number" id="num1" placeholder="Nhập số thứ nhất">
+            <input type="number" id="num2" placeholder="Nhập số thứ hai">
+
+            <button onclick="cong()">Cộng</button>
+            <button onclick="tru()">Trừ</button>
+            <button onclick="nhan()">Nhân</button>
+            <button onclick="chia()">Chia</button>
+
+            <span aria-placeholder="" id="result">0</span>
+        </div>
+
+        <script>
+            function cong() {
+                var num1 = parseFloat(document.getElementById("num1").value);
+                var num2 = parseFloat(document.getElementById("num2").value);
+                var result = num1 + num2;
+                document.getElementById("result").innerHTML = result;
+            }
+
+            function tru() {
+                var num1 = parseFloat(document.getElementById("num1").value);
+                var num2 = parseFloat(document.getElementById("num2").value);
+                var result = num1 - num2;
+                document.getElementById("result").innerHTML = result;
+            }
+
+            function nhan() {
+                var num1 = parseFloat(document.getElementById("num1").value);
+                var num2 = parseFloat(document.getElementById("num2").value);
+                var result = num1 * num2;
+                document.getElementById("result").innerHTML = result;
+            }
+
+            function chia() {
+                var num1 = parseFloat(document.getElementById("num1").value);
+                var num2 = parseFloat(document.getElementById("num2").value);
+                var result = num1 / num2;
+                document.getElementById("result").innerHTML = result;
+            }
+        </script>
+</body>
+
+</html>
