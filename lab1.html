@@ -9,6 +9,34 @@
 </head>
 
 <body>
+    <style>
+        * {
+            font-size: 30px;
+            font-family: roboto;
+            color: rgb(255, 50, 85);
+            font-weight: bold;
+        }
+        
+        #age {
+            margin-top: 10px;
+            width: 100%;
+            height: 100px;
+            border: 2px solid rgb(255, 50, 85);
+            border-radius: 5px;
+        }
+        
+        input {
+            margin-top: 20px;
+            width: 100%;
+            border: 2px solid rgb(255, 50, 85);
+            border-radius: 5px;
+        }
+        
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
     <label for="">Nhập năm sinh:</label>
     <input oninput="tinhtuoi()" min="1900" max="9999" id="date" type="number" placeholder="VD: 1990">
     <div id="age"></div>
