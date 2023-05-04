@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-  </head>
-  <body>
-    <input id="year" oninput="leapYear()" type="text" />
+</head>
+
+<body>
+    <input id="year" oninput="leapYear()" type="number" />
     <div class="result"></div>
     <script>
-      function leapYear() {
-        const year = parseInt(document.getElementById("year").value);
-        if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
-          document.querySelector(
-            ".result"
-          ).innerHTML = `Năm ${year} là năm nhuận`;
-        } else {
-          document.querySelector(
-            ".result"
-          ).innerHTML = `Năm ${year} là năm không nhuận`;
+        function leapYear() {
+            const year = parseInt(document.getElementById("year").value);
+            if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+                document.querySelector(
+                    ".result"
+                ).innerHTML = `Năm ${year} là năm nhuận`;
+            } else {
+                document.querySelector(
+                    ".result"
+                ).innerHTML = `Năm ${year} là năm không nhuận`;
+            }
         }
-      }
     </script>
-  </body>
+</body>
+
 </html>
