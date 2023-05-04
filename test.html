@@ -9,15 +9,16 @@
 </head>
 
 <body>
-    <script>
-        var array = ["hello", "world"];
-        array2 = ["hello", "world"];
-        // array = array.push("hi");
 
-        for (const key in array) {
-            console.log(array[key]);
-        }
+    <script>
+        const student = Math.random();
+        localStorage.setItem(student, student);
+        console.log(localStorage.getItem("ahiai"));
+        sessionStorage.setItem(student, student);
+        console.log(sessionStorage.getItem("ahiai"));
     </script>
+
+    Storage.
 </body>
 
 </html>
