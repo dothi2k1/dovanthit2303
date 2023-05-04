@@ -49,8 +49,8 @@
         const ageOutput = document.getElementById("age");
 
         function tinhtuoi() {
-            namsinh = document.getElementById("date").value;
-            tuoi = year - namsinh;
+            var namsinh = document.getElementById("date").value;
+            var tuoi = year - namsinh;
             console.log(tuoi);
             if (namsinh < 1900 || namsinh > year) {
                 ageOutput.innerHTML = "Vui lòng nhập một năm sinh hợp lệ.";

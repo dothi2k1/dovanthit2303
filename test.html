@@ -9,21 +9,15 @@
 </head>
 
 <body>
-    <div id="main"></div>
     <script>
-        var human = {
-            name: 'thiblue',
-            age: 30,
-            adress: "Viet Nam"
-        }
-        let text = "";
-        for (var key in human) {
-            text += human[key] + "<br>"
-        }
+        var array = ["hello", "world"];
+        array2 = ["hello", "world"];
+        // array = array.push("hi");
 
-        document.getElementById('main').innerHTML = text;
+        for (const key in array) {
+            console.log(array[key]);
+        }
     </script>
-
 </body>
 
 </html>
