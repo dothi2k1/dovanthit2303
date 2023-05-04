@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="listStudent"></div>
+    <label for="">Mã sinh viên</label>
+    <input class="masinhvien" type="text">
+    <label for="">Tên sinh viên</label>
+    <input class="name" type="text">
+    <label for="">Lớp</label>
+    <input class="grade" type="text">
+    <label for="">Tuổi</label>
+    <input class="age" type="text">
+    <button onclick="addStudent()">Thêm</button>
+
+    <script>
+        function displayStudents() {
+            const container = document.getElementById("listStudent");
+            container.innerHTML = "";
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const student = JSON.parse(localStorage.getItem(key));
+                const studentDiv = document.createElement("div");
+                studentDiv.innerHTML = `
+                <h3>Mã Sinh Viên: ${student.masinhvien}</h3>
+                <p>Tên: ${student.name}</p>
+                <p>Lớp: ${student.grade}</p>
+                <p>Tuổi: ${student.age}</p>
+            `;
+                container.appendChild(studentDiv);
+            }
+        }
+        displayStudents();
+
+        function addStudent() {
+            if (student.masinhvien == null) {
+                student
+            };
+            const student = {
+                masinhvien: document.querySelector(".masinhvien").value,
+                name: document.querySelector(".name").value,
+                grade: document.querySelector(".grade").value,
+                age: document.querySelector(".age").value
+            }
+            localStorage.setItem(student.masinhvien, JSON.stringify(student));
+
+        }
+    </script>
+
+
+
+</body>
+
+</html>
