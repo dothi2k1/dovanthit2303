@@ -1,61 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
-    <div id="listStudent"></div>
+  <body>
+    <style>
+      * {
+        font-size: 30px;
+        font-family: roboto;
+      }
+
+      .alert {
+        color: red;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      td,
+      th {
+        border: 1px solid rgba(63, 63, 63, 0.534);
+        border-radius: 5px;
+        padding: 5px 20px;
+      }
+    </style>
     <label for="">Mã sinh viên</label>
-    <input class="masinhvien" type="text">
+    <input class="masinhvien" type="text" />
     <label for="">Tên sinh viên</label>
-    <input class="name" type="text">
+    <input class="name" type="text" />
+    <br /><br />
     <label for="">Lớp</label>
-    <input class="grade" type="text">
+    <input class="grade" type="text" />
     <label for="">Tuổi</label>
-    <input class="age" type="text">
+    <input class="age" type="text" />
     <button onclick="addStudent()">Thêm</button>
+    <span class="alert"></span>
+    <br /><br />
+    <div id="listStudent"></div>
 
     <script>
-        function displayStudents() {
-            const container = document.getElementById("listStudent");
-            container.innerHTML = "";
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                const student = JSON.parse(localStorage.getItem(key));
-                const studentDiv = document.createElement("div");
-                studentDiv.innerHTML = `
-                <h3>Mã Sinh Viên: ${student.masinhvien}</h3>
-                <p>Tên: ${student.name}</p>
-                <p>Lớp: ${student.grade}</p>
-                <p>Tuổi: ${student.age}</p>
-            `;
-                container.appendChild(studentDiv);
-            }
-        }
-        displayStudents();
+      function displayStudents() {
+        const container = document.getElementById("listStudent");
+        container.innerHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th>Mã sinh viên</th>
+          <th>Tên sinh viên</th>
+          <th>Lớp</th>
+          <th>Tuổi</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  `;
 
-        function addStudent() {
-            if (student.masinhvien == null) {
-                student
-            };
-            const student = {
-                masinhvien: document.querySelector(".masinhvien").value,
-                name: document.querySelector(".name").value,
-                grade: document.querySelector(".grade").value,
-                age: document.querySelector(".age").value
-            }
-            localStorage.setItem(student.masinhvien, JSON.stringify(student));
-
+        const tableBody = container.querySelector("tbody");
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          const student = JSON.parse(localStorage.getItem(key));
+          const row = document.createElement("tr");
+          row.innerHTML = `
+      <td>${student.masinhvien}</td>
+      <td>${student.name}</td>
+      <td>${student.grade}</td>
+      <td>${student.age}</td>
+    `;
+          tableBody.appendChild(row);
         }
+      }
+      displayStudents();
+
+      function addStudent() {
+        const studentId = document.querySelector(".masinhvien").value;
+        const existingStudent = localStorage.getItem(studentId);
+
+        if (existingStudent) {
+          document.querySelector(
+            ".alert"
+          ).innerHTML = `Đã tồn tại mã sinh viên`;
+        } else {
+          document.querySelector(
+            ".alert"
+          ).innerHTML = `Đã thêm thành công sinh viên ${studentId}`;
+          const student = {
+            masinhvien: studentId,
+            name: document.querySelector(".name").value,
+            grade: document.querySelector(".grade").value,
+            age: document.querySelector(".age").value,
+          };
+          localStorage.setItem(studentId, JSON.stringify(student));
+          displayStudents();
+        }
+      }
     </script>
-
-
-
-</body>
-
+  </body>
 </html>
