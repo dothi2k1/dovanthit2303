@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        * {
+            font-size: 30px;
+            font-family: roboto;
+        }
+        
+        .alert {
+            color: red;
+        }
+        
+        label {
+            font-weight: bold;
+        }
+        
+        td,
+        th {
+            border: 1px solid rgba(63, 63, 63, 0.534);
+            border-radius: 5px;
+            padding: 5px 20px;
+        }
+        
+        button {
+            cursor: pointer;
+        }
+    </style>
+    <label for="">Mã sinh viên</label>
+    <input class="masinhvien" type="text" />
+    <label for="">Tên sinh viên</label>
+    <input class="name" type="text" />
+    <br /><br />
+    <label for="">Lớp</label>
+    <input class="grade" type="text" />
+    <label for="">Tuổi</label>
+    <input class="age" type="text" />
+    <button onclick="addStudent()">Thêm</button>
+    <span class="alert"></span>
+    <br /><br />
+    <div id="listStudent"></div>
+
+    <script>
+        const urlStudents = 'https://nodejs.boombayah.space/user/editStudent';
+
+        function displayStudents() {
+            fetch(urlStudents)
+                .then(response => response.json())
+                .then(json => {
+                    const container = document.getElementById("listStudent");
+                    container.innerHTML = `
+    <table>
+      <thead>
+        <tr> 
+          <th>Mã sinh viên</th>
+          <th>Tên sinh viên</th>
+          <th>Lớp</th>
+          <th>Tuổi</th>
+          <th>Thao Tác</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  `;
+
+                    const tableBody = container.querySelector("tbody");
+                    for (const element of json) {
+                        const student = element;
+
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+      <td id="value-cell">${student.id}</td>
+      <td>${student.name}</td>
+      <td>${student.password}</td>
+      <td>${student.email}</td>
+      <button onclick="deleteStudent()">Xóa</button>
+      <button>Sửa</button>
+    `;
+                        tableBody.appendChild(row);
+                    }
+                })
+
+
+        }
+        displayStudents();
+
+
+
+        function addStudent() {
+            displayStudents();
+            const data = {
+                id: document.querySelector(".masinhvien").value,
+                name: document.querySelector(".name").value,
+                password: document.querySelector(".grade").value,
+                email: document.querySelector(".age").value
+            };
+            console.log(data);
+            document.querySelector(
+                ".alert"
+            ).innerHTML = `Đã thêm thành công sinh viên ${data.name}`;
+            fetch(urlStudents, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+
+                    console.log(data);
+                })
+                .catch(error => console.error(error));
+
+        }
+
+        function deleteStudent() {
+            displayStudents();
+            const data = {
+                id: document.getElementById('value-cell').textContent
+            };
+            console.log(data);
+            document.querySelector(
+                ".alert"
+            ).innerHTML = `Xóa thành công sinh viên ${data.id}`;
+            fetch(urlStudents, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+
+        }
+    </script>
+</body>
+
+</html>

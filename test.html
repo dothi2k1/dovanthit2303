@@ -9,16 +9,21 @@
 </head>
 
 <body>
-
     <script>
-        const student = Math.random();
-        localStorage.setItem(student, student);
-        console.log(localStorage.getItem("ahiai"));
-        sessionStorage.setItem(student, student);
-        console.log(sessionStorage.getItem("ahiai"));
-    </script>
+        function asyncFunction(callback) {
+            console.log("Start");
+            setTimeout(() => {
+                callback();
+            }, 1000);
+            console.log("Waiting");
+        }
 
-    Storage.
+        let printEnd = function() {
+            console.log("End");
+        }
+
+        asyncFunction(printEnd)
+    </script>
 </body>
 
 </html>
