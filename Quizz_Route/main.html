@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="wrapper">
+    <h2 style="font-weight: bold; color: #ff4700">Quizz is made by DoThi</h2>
+    <div
+      ng-repeat="question in questions"
+      ng-show="currentQuestionIndex === $index"
+      ng-click="results()"
+    >
+      <h5>Câu hỏi {{currentQuestionIndex+1}}: {{ question.text }}</h5>
+      <br />
+      <ul>
+        <li ng-repeat="option in question.options">
+          <label
+            class="question"
+            ng-class="{ 'correct-option': option === question.correctAnswer && question.answer, 'incorrect-option': option !== question.correctAnswer && question.answer}"
+          >
+            <input
+              type="radio"
+              ng-model="question.answer"
+              ng-value="option"
+              ng-change="checkAnswer(question)"
+            />
+            {{ option }}
+          </label>
+        </li>
+      </ul>
+      <p ng-show="question.answered">Câu hỏi bạn chọn: {{ question.answer }}</p>
+      <p ng-show="question.answered">
+        Đáp án đúng là: {{ question.correctAnswer }}
+      </p>
+      <button ng-click="preQuestion()">Prev</button>
+      <button ng-click="nextQuestion()">Next</button>
+      <br /><br />
+      <h3>Kết quả:</h3>
+      <div ng-show="true">
+        <button ng-click="result()">Xem kết quả</button>
+        <h5 ng-show="resultCalculated">
+          Số câu trả lời đúng:
+          <strong>{{ correctCount }}/{{questions.length}}</strong> câu
+        </h5>
+      </div>
+      <hr />
+    </div>
+  </div>
+</div>

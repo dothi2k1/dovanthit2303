@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css"
+      integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"
+      integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"
+      integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      .wrapper {
+        max-width: 600px;
+        margin: 100px auto;
+        background-color: rgb(255 234 225);
+        padding: 20px 50px;
+        border-radius: 5px;
+        box-shadow: 20px 17px 2px #b98b78;
+      }
+
+      .question {
+        cursor: pointer;
+        background-color: rgb(255 184 151);
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        width: 100%;
+      }
+
+      .question:hover {
+        background-color: rgb(255, 131, 93);
+      }
+
+      ul {
+        padding: 0;
+        list-style: none;
+      }
+
+      button {
+        background-color: rgb(255 174 143);
+        padding: 10px 30px;
+        border: 1px solid rgb(110 40 0);
+        border-radius: 5px;
+      }
+
+      button:hover {
+        background-color: rgb(255, 131, 93);
+      }
+
+      .correct-option {
+        background-color: rgb(0 183 52 / 86%);
+      }
+
+      .incorrect-option {
+        background-color: rgb(255 73 73 / 82%);
+      }
+      a {
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body ng-app="my-app">
+    <div ng-controller="QuizController">
+      <div ng-include="'./header.html'"></div>
+      <div ng-view></div>
+      <script src="user.js"></script>
+      <div ng-include="'./footer.html'"></div>
+    </div>
+
+    <script>
+      var app = angular.module("my-app", ["ngRoute"]);
+
+      app.config(function ($routeProvider) {
+        $routeProvider
+          .when("/", {
+            templateUrl: "main.html",
+          })
+          .when("/user", {
+            templateUrl: "user.html",
+          });
+      });
+
+      app.controller("QuizController", function ($scope) {
+        $scope.menus = [
+          {
+            url: "#!home",
+            title: "Home",
+          },
+          {
+            url: "#!user",
+            title: "user",
+          },
+        ];
+
+        $scope.questions = [
+          {
+            text: "How many legs have chicken?",
+            options: ["1", "2", "Do not have", "So many"],
+            correctAnswer: "2",
+            answered: false,
+          },
+          {
+            text: "Is the pig fat?",
+            options: ["Are not", "Have", "3", "4"],
+            correctAnswer: "Have",
+            answered: false,
+          },
+          {
+            text: "There are several types of sun",
+            options: ["1", "2", "False question", "4"],
+            correctAnswer: "False question",
+            answered: false,
+          },
+          {
+            text: "Hello Vietnam",
+            options: ["1", "2", "3", "4"],
+            correctAnswer: "1",
+            answered: false,
+          },
+        ];
+
+        $scope.currentQuestionIndex = 0;
+
+        // function check results
+        $scope.checkAnswer = function (question) {
+          question.answered = true;
+        };
+
+        // function calculation of results
+        $scope.result = function () {
+          $scope.correctCount = 0;
+
+          for (const element of $scope.questions) {
+            if (element.answer === element.correctAnswer) {
+              $scope.correctCount++;
+            }
+          }
+          $scope.resultCalculated = true;
+        };
+
+        $scope.nextQuestion = function () {
+          if ($scope.currentQuestionIndex < $scope.questions.length - 1) {
+            $scope.currentQuestionIndex++;
+          } else {
+            $scope.showResult = true;
+          }
+        };
+
+        $scope.preQuestion = function () {
+          if ($scope.currentQuestionIndex > 0) {
+            $scope.currentQuestionIndex--;
+          }
+        };
+      });
+    </script>
+  </body>
+</html>

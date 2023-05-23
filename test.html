@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css"
+      integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"
+      integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body ng-controller="MyController">
+    <style>
+      my-custom-directive {
+        background-color: rgb(17, 255, 76);
+      }
+    </style>
+    <form action="" name="myForm">
+      <input
+        type="email"
+        name="myInput"
+        placeholder="input text"
+        ng-model="myInput"
+        required
+      />
+    </form>
+    <p>{{myForm.myInput.$valid}}</p>
+
+    <script>
+      var app = angular.module("myApp", []);
+
+      app.directive("myCustomDirective", function () {
+        return {
+          template: "<h1>My {{name}}</h1>",
+        };
+      });
+
+      app.controller("MyController", function ($scope, $location) {
+        console.log($location);
+        $scope.myUrl = $location.absUrl();
+      });
+    </script>
+  </body>
+</html>
