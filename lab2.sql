@@ -42,11 +42,10 @@ create table history_supply (
     FOREIGN KEY (client_code) REFERENCES client (client_code)
 );
 
-
 -- Tạo dữ liệu cho bảng brand
 INSERT INTO brand (brand_code, brand_name, country)
-VALUES ('B001', 'Brand 1', 'Country 1'),
-       ('B002', 'Brand 2', 'Country 2'),
+VALUES ('B001', 'Apple', 'Country 1'),
+       ('B002', 'Apple', 'Country 2'),
        ('B003', 'Brand 3', 'Country 3');
 
 -- Tạo dữ liệu cho bảng product
@@ -57,13 +56,13 @@ VALUES ('P001', 'Product 1', 'Red', 10.99, 'B001'),
 
 -- Tạo dữ liệu cho bảng company
 INSERT INTO company (company_code, name, address, tel, manager)
-VALUES ('C001', 'Company 1', 'Address 1', '1234567890', 'Manager 1'),
-       ('C002', 'Company 2', 'Address 2', '9876543210', 'Manager 2'),
+VALUES ('C001', 'Company 1', 'Hà Nội', '1234567890', 'Manager 1'),
+       ('C002', 'Company 2', 'Hà Nội', '9876543210', 'Manager 2'),
        ('C003', 'Company 3', 'Address 3', '4567890123', 'Manager 3');
 
 -- Tạo dữ liệu cho bảng client
 INSERT INTO client (client_code, name, address, tel)
-VALUES ('K001', 'Client 1', 'Address 1', '1111111111'),
+VALUES ('K001', 'Hải Hà', 'Address 1', '1111111111'),
        ('K002', 'Client 2', 'Address 2', '2222222222'),
        ('K003', 'Client 3', 'Address 3', '3333333333');
 
