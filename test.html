@@ -20,34 +20,29 @@
     ></script>
   </head>
   <body ng-controller="MyController">
-    <style>
-      my-custom-directive {
-        background-color: rgb(17, 255, 76);
-      }
-    </style>
-    <form action="" name="myForm">
-      <input
-        type="email"
-        name="myInput"
-        placeholder="input text"
-        ng-model="myInput"
-        required
-      />
-    </form>
-    <p>{{myForm.myInput.$valid}}</p>
+    <input type="number" ng-model="number" ng-change="in_thong_bao()" />
+    <p>Hello {{empId}}</p>
 
+    <!-- code js -->
     <script>
       var app = angular.module("myApp", []);
 
-      app.directive("myCustomDirective", function () {
-        return {
-          template: "<h1>My {{name}}</h1>",
-        };
-      });
+      app.controller("MyController", [
+        "$scope",
+        "kiem_tra_chan_le",
+        function ($scope, kiem_tra_chan_le) {
+          $scope.in_thong_bao = function () {
+            kiem_tra_chan_le($scope.number);
+          };
+        },
+      ]);
 
-      app.controller("MyController", function ($scope, $location) {
-        console.log($location);
-        $scope.myUrl = $location.absUrl();
+      app.factory("kiem_tra_chan_le", function ($window) {
+        return function (number) {
+          if (number % 2 == 0) {
+            $window.alert("Số Chẵn");
+          }
+        };
       });
     </script>
   </body>
