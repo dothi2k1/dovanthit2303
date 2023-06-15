@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css"
+      integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"
+      integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"
+      integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+  </head>
+
+  <body ng-app="my-app">
+    <div ng-controller="myController">
+      <ul class="breadcrumb">
+        <li ng-repeat="menu in menus">
+          <a href="{{menu.url}}">{{menu.title}}</a>
+        </li>
+      </ul>
+      <div ng-view></div>
+    </div>
+    <script>
+      var app = angular.module("my-app", ["ngRoute"]);
+      app.config(function ($routeProvider) {
+        $routeProvider
+          .when("/home", {
+            templateUrl: "main.html",
+          })
+          .when("/user", {
+            templateUrl: "user.html",
+          });
+      });
+      app.controller("myController", function ($scope) {
+        $scope.menus = [
+          {
+            url: "#!home",
+            title: "Home",
+          },
+          {
+            url: "#!user",
+            title: "user",
+          },
+        ];
+      });
+    </script>
+  </body>
+</html>
