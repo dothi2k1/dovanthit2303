@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pagination Example</title>
+    <style>
+        .pagination {
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            margin-left: 5px;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dataContainer">
+        <!-- Dữ liệu hiển thị sẽ được thêm vào đây -->
+    </div>
+    <div class="pagination" id="paginationContainer">
+        <!-- Các liên kết phân trang sẽ được thêm vào đây -->
+    </div>
+
+    <script>
+        var data = [
+            "Item 1",
+            "Item 2",
+            "Item 3",
+            "Item 4",
+            "Item 5",
+            "Item 6",
+            "Item 7",
+            "Item 8",
+            "Item 9",
+            "Item 10",
+            "Item 11",
+            "Item 12",
+            "Item 13",
+            "Item 14",
+            "Item 15",
+            "Item 16",
+            "Item 17",
+            "Item 18",
+            "Item 19",
+            "Item 20",
+            // Thêm các phần tử giả vào đây
+        ];
+
+        var itemsPerPage = 5;
+        var currentPage = 1;
+        var totalPages = Math.ceil(data.length / itemsPerPage);
+
+        function displayData() {
+            var startItem = (currentPage - 1) * itemsPerPage;
+            var endItem = startItem + itemsPerPage;
+
+            var dataContainer = document.getElementById("dataContainer");
+            dataContainer.innerHTML = "";
+
+            for (var i = startItem; i < endItem; i++) {
+                if (data[i]) {
+                    var itemElement = document.createElement("div");
+                    itemElement.innerHTML = data[i];
+                    dataContainer.appendChild(itemElement);
+                }
+            }
+        }
+
+        function createPagination() {
+            var paginationContainer = document.getElementById("paginationContainer");
+            paginationContainer.innerHTML = "";
+
+            for (var page = 1; page <= totalPages; page++) {
+                var linkElement = document.createElement("a");
+                linkElement.href = "#";
+                linkElement.innerText = page;
+                linkElement.addEventListener("click", function (event) {
+                    currentPage = parseInt(event.target.innerText);
+                    displayData();
+                    updatePagination();
+                });
+
+                if (page === currentPage) {
+                    linkElement.classList.add("active");
+                }
+
+                paginationContainer.appendChild(linkElement);
+            }
+        }
+
+        function updatePagination() {
+            var links = document.querySelectorAll("#paginationContainer a");
+            links.forEach(function (link) {
+                var pageNumber = parseInt(link.innerText);
+                if (pageNumber === currentPage) {
+                    link.classList.add("active");
+                } else {
+                    link.classList.remove("active");
+                }
+            });
+        }
+
+        displayData();
+        createPagination();
+    </script>
+</body>
+
+</html>
