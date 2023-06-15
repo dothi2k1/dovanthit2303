@@ -46,17 +46,20 @@ VALUES ('B001', 'Apple', 'Country 1'),
        ('B002', 'Apple', 'Country 2'),
        ('B003', 'Brand 3', 'Country 3');
 
+
 -- Tạo dữ liệu cho bảng product
 INSERT INTO product (product_code, name, color, price, brand_code)
 VALUES ('P001', 'Product 1', 'Red', 10.99, 'B001'),
        ('P002', 'Product 2', 'Blue', 19.99, 'B002'),
        ('P003', 'Product 3', 'Green', 14.99, 'B003');
 
+
 -- Tạo dữ liệu cho bảng company
 INSERT INTO company (company_code, name, address, tel, manager)
 VALUES ('C001', 'Company 1', N'Ha Noi', '1234567890', 'Manager 1'),
        ('C002', 'Company 2', N'Ha Noi', '9876543210', 'Manager 2'),
        ('C003', 'Company 3', 'Address 3', '4567890123', 'Manager 3');
+
 -- Tạo dữ liệu cho bảng client
 INSERT INTO client (client_code, name, address, tel)
 VALUES ('K001', N'Hai Ha', 'Address 1', '1111111111'),
@@ -71,13 +74,49 @@ VALUES ('C001', 'P001', 'K001', '2023-01-01', 5),
 	   ('C002', 'P001', 'K001', '2023-01-01', 5),
 	   ('C003', 'P002', 'K001', '2023-01-01', 5),
 	   ('C001', 'P003', 'K002', '2023-01-01', 5);
+	   
+INSERT INTO history_supply (company_code, product_code, client_code, date, quantity)
+SELECT company_code, product_code, client_code, date, quantity from history_supply
+
+
 
 delete from product
 select * from brand;
 select * from client;
 select * from company;
+select * from product order by insert_time desc;
 select * from product;
-select * from history_supply;
+
+select * from history_supply where company_code = 'C005';
+create index company_idx
+on history_supply(company_code)
+
+drop index company_idx on history_supply
+
+select name,count(*),avg(price) from product group by name having avg(price) >10
+select *,'Pro' + name from product
+SET STATISTICS TIME ON
+select top(10) percent * from history_supply;
+select distinct product_code from history_supply;
+select product_code from history_supply;
+truncate table history_supply;
+
+DECLARE @StartDate AS date;
+DECLARE @EndDate AS date;
+SELECT @StartDate = '01/01/2019', -- Date Format - DD/MM/YYY
+       @EndDate   = '12/31/2021';
+update product
+set update_time  = DATEADD(DAY, RAND(CHECKSUM(NEWID()))*(1+DATEDIFF(DAY, @StartDate, @EndDate)),@StartDate)
+
+
+alter table product
+--add insert_time date
+add update_time date;
+
+-- tao du lieu random
+select replace(newid(), '-','')
+select newid();
+
 
 select * from company where 
 address like N'%Ha Noi%';
@@ -93,10 +132,6 @@ not in ( select client_code from client where name like N'%Hai Ha%'))
 -- Mat hang co don gia lon nhat
 select * from product where price = (select max(price) from product);
 
-SELECT *, (SELECT COUNT(product_code) FROM history_supply WHERE history_supply.product_code = product.product_code) AS count
-FROM product
-WHERE product_code IN (SELECT product_code FROM history_supply where client_code
-in (select client_code from client where name like N'%Hai Ha%'))
 
 SELECT p.name AS product_name, COUNT(DISTINCT hs.company_code) AS supplier_count
 FROM history_supply hs
