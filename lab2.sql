@@ -98,3 +98,10 @@ FROM product
 WHERE product_code IN (SELECT product_code FROM history_supply where client_code
 in (select client_code from client where name like N'%Hai Ha%'))
 
+SELECT p.name AS product_name, COUNT(DISTINCT hs.company_code) AS supplier_count
+FROM history_supply hs
+INNER JOIN product p ON p.product_code = hs.product_code
+INNER JOIN client c ON c.client_code = hs.client_code
+WHERE c.name = N'Hai Ha'
+GROUP BY p.name
+HAVING COUNT(DISTINCT hs.company_code) >= 2;
